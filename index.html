@@ -923,7 +923,7 @@
       var total = selected.reduce(function (sum, book) { return sum + (book.price * (bookQuantities[book.id] || 1)); }, 0);
       var booksText = selected.map(function (book) {
         var qty = bookQuantities[book.id] || 1;
-        return book.title + " × " + qty + " (" + (book.price * qty) + " ج.م)";
+        return book.title + " (" + book.category + ") × " + qty + " (" + (book.price * qty) + " ج.م)";
       }).join(" | ");
 
       var orderData = {
