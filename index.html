@@ -3,23 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>طلب كتب - مكتبة مازن</title>
+  <title>طلب كتب - مكتبة الطباعة</title>
   <style>
     :root {
       --primary: #2563eb;
       --primary-dark: #1d4ed8;
-      --primary-soft: #dbeafe;
-      --success: #16a34a;
-      --success-soft: #dcfce7;
-      --danger: #dc2626;
-      --warning: #f97316;
+      --green: #16a34a;
+      --red: #dc2626;
       --text: #0f172a;
       --muted: #64748b;
       --border: #e2e8f0;
-      --card: rgba(255, 255, 255, 0.92);
       --bg: #f8fafc;
-      --shadow: 0 20px 55px rgba(15, 23, 42, 0.10);
-      --radius: 24px;
+      --card: #ffffff;
+      --soft-blue: #eff6ff;
+      --soft-green: #ecfdf5;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
     }
 
     * { box-sizing: border-box; }
@@ -28,38 +26,28 @@
     body {
       margin: 0;
       font-family: Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 45%, #ecfeff 100%);
       color: var(--text);
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top right, rgba(37, 99, 235, 0.18), transparent 30%),
-        radial-gradient(circle at bottom left, rgba(34, 197, 94, 0.12), transparent 32%),
-        linear-gradient(135deg, #f8fafc 0%, #eff6ff 48%, #ecfeff 100%);
     }
 
-    button, input, select, textarea { font-family: inherit; }
-    button { cursor: pointer; }
-
     .container {
-      width: min(1180px, 94%);
+      width: min(1120px, 94%);
       margin: auto;
-      padding: 18px 0 42px;
+      padding: 18px 0 48px;
     }
 
     .topbar {
-      position: sticky;
-      top: 12px;
-      z-index: 30;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 12px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--border);
+      border-radius: 22px;
       padding: 12px 14px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.82);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      margin-bottom: 16px;
+      box-shadow: 0 10px 25px rgba(15,23,42,0.05);
     }
 
     .brand {
@@ -75,239 +63,165 @@
       border-radius: 16px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, var(--primary), #06b6d4);
+      background: var(--primary);
       color: white;
-      box-shadow: 0 12px 22px rgba(37, 99, 235, 0.22);
+      font-size: 22px;
     }
 
-    .small-muted { color: var(--muted); font-size: 13px; font-weight: 700; }
+    .brand small { display: block; color: var(--muted); margin-top: 3px; }
 
-    .top-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .pill {
-      background: #f1f5f9;
-      padding: 8px 12px;
+    .top-whatsapp {
+      text-decoration: none;
+      background: #22c55e;
+      color: white;
+      padding: 11px 14px;
       border-radius: 999px;
-      color: #334155;
-      border: 1px solid #e5e7eb;
+      font-weight: 900;
+      white-space: nowrap;
     }
 
     .hero {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      gap: 18px;
-      margin-bottom: 18px;
+      gap: 16px;
+      margin-bottom: 16px;
     }
 
-    .card {
+    .hero-card, .info-card, .order-card, .summary-card {
       background: var(--card);
-      border: 1px solid rgba(226, 232, 240, 0.95);
-      border-radius: 30px;
+      border: 1px solid var(--border);
+      border-radius: 26px;
       box-shadow: var(--shadow);
     }
 
-    .hero-card, .promo-card, .order-card, .summary-card { padding: 26px; }
+    .hero-card { padding: 28px; }
 
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: var(--primary-soft);
+      display: inline-block;
+      background: #dbeafe;
       color: #1e40af;
-      padding: 9px 14px;
+      padding: 8px 13px;
       border-radius: 999px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 900;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     h1 {
-      margin: 0 0 14px;
-      font-size: clamp(33px, 5vw, 58px);
-      line-height: 1.1;
+      margin: 0 0 12px;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.12;
       letter-spacing: -1px;
     }
 
-    .gradient-text {
-      background: linear-gradient(135deg, var(--primary), #0891b2);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+    .blue { color: var(--primary); }
+    .hero-card p, .info-card p, .note { color: var(--muted); line-height: 1.8; }
 
-    .hero p, .promo-card p, .feature-card p, .note {
-      color: var(--muted);
-      line-height: 1.85;
-    }
-
-    .hero-buttons {
+    .hero-actions {
       display: flex;
+      gap: 10px;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
+      margin-top: 18px;
     }
 
-    .hero-link, .submit-button, .whatsapp-btn {
+    .hero-btn {
+      border: 0;
       text-decoration: none;
-      border-radius: 18px;
-      padding: 14px 18px;
-      font-weight: 900;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      border: 0;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+      padding: 13px 17px;
+      border-radius: 16px;
+      font-weight: 900;
+      cursor: pointer;
+      font-family: inherit;
     }
 
-    .hero-link:hover, .submit-button:hover, .whatsapp-btn:hover, .tab:hover {
-      transform: translateY(-1px);
-    }
+    .hero-btn.primary { background: var(--primary); color: white; }
+    .hero-btn.light { background: #f1f5f9; color: #1e293b; border: 1px solid var(--border); }
 
-    .hero-link.primary, .submit-button {
-      background: var(--primary);
+    .info-card {
+      padding: 22px;
+      background: linear-gradient(145deg, #0f172a, #1e3a8a);
       color: white;
-      box-shadow: 0 14px 26px rgba(37, 99, 235, 0.24);
+      overflow: hidden;
     }
 
-    .hero-link.secondary {
-      background: white;
-      color: #1e293b;
-      border: 1px solid var(--border);
-    }
+    .info-card p { color: #cbd5e1; margin-bottom: 18px; }
 
-    .steps {
+    .mini-steps {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-top: 22px;
     }
 
-    .step {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 14px;
+    .mini-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px;
+      padding: 12px;
       font-weight: 800;
-      color: #334155;
-      min-height: 104px;
     }
 
-    .step span {
+    .mini-step span {
       width: 30px;
       height: 30px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      background: #e0f2fe;
-      color: #0369a1;
-      margin-bottom: 9px;
-    }
-
-    .promo-card {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(145deg, #0f172a, #1e3a8a 58%, #0891b2);
-      color: white;
-    }
-
-    .promo-card::after {
-      content: "";
-      position: absolute;
-      width: 190px;
-      height: 190px;
-      left: -50px;
-      top: -50px;
-      background: rgba(255, 255, 255, 0.12);
       border-radius: 50%;
-    }
-
-    .promo-card h2 { margin-top: 0; font-size: 30px; }
-    .promo-card p { color: #dbeafe; }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 22px;
-    }
-
-    .stat {
-      background: rgba(255,255,255,0.13);
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: 20px;
-      padding: 15px;
-      backdrop-filter: blur(8px);
-    }
-
-    .stat strong { display: block; font-size: 24px; }
-    .stat span { color: #dbeafe; font-size: 13px; }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-
-    .feature-card {
-      padding: 18px;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      background: rgba(255,255,255,0.82);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-    }
-
-    .feature-icon {
-      width: 44px;
-      height: 44px;
       display: grid;
       place-items: center;
-      border-radius: 17px;
-      background: #eff6ff;
-      flex: 0 0 44px;
-      font-size: 21px;
+      background: white;
+      color: var(--primary);
+      flex: 0 0 30px;
     }
-
-    .feature-card h3 { margin: 0 0 5px; }
-    .feature-card p { margin: 0; font-size: 14px; }
 
     .grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.75fr);
-      gap: 18px;
+      grid-template-columns: minmax(0, 1.45fr) minmax(310px, 0.75fr);
+      gap: 16px;
       align-items: start;
     }
 
-    .summary-card {
-      position: sticky;
-      top: 92px;
-    }
+    .order-card, .summary-card { padding: 22px; }
+    .summary-card { position: sticky; top: 14px; }
 
     .section-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 14px;
     }
 
-    .section-title { margin: 0; font-size: 24px; }
+    .section-title { margin: 0; font-size: 23px; }
+    .small-muted { color: var(--muted); font-size: 13px; font-weight: 800; }
+
+    .step-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 22px 0 12px;
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .step-title span {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      font-size: 14px;
+    }
 
     .form-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-bottom: 24px;
+      gap: 12px;
     }
 
     .full { grid-column: 1 / -1; }
@@ -315,19 +229,18 @@
     label.field-label {
       display: block;
       font-weight: 900;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
 
     input, select, textarea {
       width: 100%;
       padding: 14px 15px;
       border: 1px solid var(--border);
-      border-radius: 17px;
+      border-radius: 16px;
       font-size: 15px;
+      font-family: inherit;
       outline: none;
       background: white;
-      color: var(--text);
-      transition: border-color 0.16s ease, box-shadow 0.16s ease;
     }
 
     input:focus, select:focus, textarea:focus {
@@ -335,75 +248,82 @@
       box-shadow: 0 0 0 4px rgba(37,99,235,0.12);
     }
 
-    textarea { min-height: 92px; resize: vertical; }
+    textarea { min-height: 86px; resize: vertical; }
 
     .toolbar {
       display: grid;
       grid-template-columns: 1fr 210px;
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
     .category-tabs {
       display: flex;
       gap: 8px;
-      overflow: auto;
-      padding: 4px 0 14px;
+      overflow-x: auto;
+      padding: 6px 4px 14px;
       scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .category-tabs::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .category-tabs::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 999px;
+    }
+
+    .category-mobile-select {
+      display: none;
+      margin-bottom: 14px;
+      font-weight: 900;
     }
 
     .tab {
+      flex-shrink: 0;
       border: 1px solid var(--border);
       background: #fff;
       color: #334155;
       border-radius: 999px;
-      padding: 10px 15px;
+      padding: 9px 14px;
       white-space: nowrap;
+      cursor: pointer;
       font-weight: 900;
       width: auto;
-      transition: 0.16s ease;
+      font-family: inherit;
     }
 
-    .tab.active {
+    .tab.active, .tab:hover {
       background: var(--primary);
       color: white;
       border-color: var(--primary);
-      box-shadow: 0 10px 20px rgba(37,99,235,0.18);
     }
 
     .books {
       display: grid;
-      gap: 12px;
-      max-height: 610px;
+      gap: 10px;
+      max-height: 560px;
       overflow: auto;
       padding-left: 4px;
-      scrollbar-width: thin;
     }
 
     .book {
       display: grid;
       grid-template-columns: auto 1fr auto;
-      gap: 13px;
+      gap: 12px;
       align-items: center;
       border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 15px;
+      border-radius: 20px;
+      padding: 14px;
       background: #fff;
       cursor: pointer;
-      transition: 0.16s ease;
+      transition: 0.15s;
     }
 
-    .book:hover {
-      border-color: #bfdbfe;
-      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.06);
-      transform: translateY(-1px);
-    }
-
-    .book.selected {
-      border-color: var(--primary);
-      background: linear-gradient(135deg, #eff6ff, #ffffff);
-      box-shadow: 0 12px 26px rgba(37,99,235,0.13);
-    }
+    .book:hover { border-color: #bfdbfe; transform: translateY(-1px); }
+    .book.selected { border-color: var(--primary); background: var(--soft-blue); }
 
     .book input[type="checkbox"] {
       width: 22px;
@@ -411,39 +331,29 @@
       accent-color: var(--primary);
     }
 
-    .book-title { font-weight: 900; margin-bottom: 5px; font-size: 16px; }
+    .book-title { font-weight: 900; margin-bottom: 5px; }
     .book-meta { color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .price { font-weight: 900; color: var(--primary-dark); white-space: nowrap; }
 
     .book-side {
       display: grid;
-      gap: 9px;
+      gap: 8px;
       justify-items: end;
-    }
-
-    .price {
-      font-weight: 900;
-      color: var(--primary-dark);
-      white-space: nowrap;
-      font-size: 16px;
     }
 
     .quantity-box {
       display: flex;
       align-items: center;
-      gap: 7px;
-      white-space: nowrap;
+      gap: 6px;
+      font-size: 13px;
       font-weight: 900;
       color: #334155;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      padding: 6px 8px;
-      border-radius: 14px;
     }
 
     .quantity-input {
       width: 64px;
       padding: 8px 8px;
-      border-radius: 11px;
+      border-radius: 12px;
       text-align: center;
       font-weight: 900;
     }
@@ -460,34 +370,36 @@
     }
 
     .book-tag.hot { background: #ffedd5; color: #c2410c; }
-    .book-tag.new { background: var(--success-soft); color: #166534; }
+    .book-tag.new { background: #dcfce7; color: #166534; }
 
     .empty-state {
       text-align: center;
-      padding: 28px;
+      padding: 24px;
       background: #f8fafc;
       border: 1px dashed #cbd5e1;
-      border-radius: 22px;
+      border-radius: 20px;
       color: var(--muted);
       font-weight: 800;
-      line-height: 1.8;
+      line-height: 1.7;
+    }
+
+    .summary-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 12px;
+      margin: 12px 0;
     }
 
     .summary-line {
       display: flex;
       justify-content: space-between;
-      padding: 12px 0;
+      padding: 10px 0;
       border-bottom: 1px solid var(--border);
       color: #334155;
     }
 
-    .status-pill {
-      background: #fef3c7;
-      color: #92400e;
-      border-radius: 999px;
-      padding: 5px 10px;
-      font-size: 13px;
-    }
+    .summary-line:last-child { border-bottom: 0; }
 
     .selected-list {
       margin: 12px 0;
@@ -504,66 +416,63 @@
     .selected-list li {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       gap: 8px;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 15px;
+      background: #f1f5f9;
+      border-radius: 13px;
       padding: 10px 11px;
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
     .remove-item {
       border: 0;
-      background: #fee2e2;
-      color: var(--danger);
+      background: transparent;
+      color: var(--red);
       font-weight: 900;
       cursor: pointer;
       width: auto;
-      padding: 6px 9px;
-      border-radius: 999px;
+      padding: 0;
+      font-family: inherit;
     }
 
     .total {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+      background: #dbeafe;
       color: #1e3a8a;
-      padding: 18px;
-      border-radius: 22px;
-      font-size: 22px;
+      padding: 16px;
+      border-radius: 18px;
+      font-size: 21px;
       font-weight: 900;
-      margin: 16px 0;
+      margin: 14px 0;
     }
 
     .submit-button {
       width: 100%;
-      font-size: 17px;
-      padding: 15px 18px;
-    }
-
-    .submit-button:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
-
-    .whatsapp-btn {
-      width: 100%;
-      margin-top: 10px;
-      background: #22c55e;
+      border: 0;
+      background: var(--primary);
       color: white;
-      display: none;
-      box-shadow: 0 14px 24px rgba(34,197,94,0.20);
+      font-size: 17px;
+      font-weight: 900;
+      padding: 15px 18px;
+      border-radius: 18px;
+      cursor: pointer;
+      font-family: inherit;
+      text-align: center;
     }
+
+    .submit-button:disabled { opacity: 0.65; cursor: not-allowed; }
 
     .message {
       margin-top: 12px;
       padding: 13px 14px;
-      border-radius: 16px;
+      border-radius: 15px;
       display: none;
       font-weight: 800;
       line-height: 1.7;
     }
 
-    .message.success { background: var(--success-soft); color: #166534; display: block; }
+    .message.success { background: #dcfce7; color: #166534; display: block; }
     .message.error { background: #fee2e2; color: #991b1b; display: block; }
 
     .trust-box {
@@ -578,23 +487,8 @@
     .trust-box div {
       background: #f8fafc;
       border: 1px solid var(--border);
-      border-radius: 15px;
+      border-radius: 14px;
       padding: 10px;
-    }
-
-    .floating-whatsapp {
-      position: fixed;
-      left: 18px;
-      bottom: 18px;
-      z-index: 20;
-      width: auto;
-      background: #22c55e;
-      color: white;
-      padding: 13px 16px;
-      border-radius: 999px;
-      font-weight: 900;
-      text-decoration: none;
-      box-shadow: 0 16px 35px rgba(22,163,74,0.3);
     }
 
     .success-modal {
@@ -603,7 +497,7 @@
       display: none;
       align-items: center;
       justify-content: center;
-      background: rgba(15, 23, 42, 0.48);
+      background: rgba(15, 23, 42, 0.45);
       z-index: 50;
       padding: 20px;
     }
@@ -613,46 +507,41 @@
     .modal-card {
       width: min(430px, 100%);
       background: white;
-      border-radius: 30px;
-      padding: 28px;
+      border-radius: 28px;
+      padding: 26px;
       text-align: center;
       box-shadow: var(--shadow);
     }
 
     .modal-icon {
-      width: 74px;
-      height: 74px;
+      width: 72px;
+      height: 72px;
       margin: 0 auto 14px;
       border-radius: 50%;
       display: grid;
       place-items: center;
-      background: var(--success-soft);
-      color: var(--success);
+      background: #dcfce7;
+      color: #16a34a;
       font-size: 34px;
     }
 
     footer { text-align: center; color: var(--muted); margin-top: 28px; font-size: 14px; }
 
-    @media (max-width: 930px) {
+    @media (max-width: 900px) {
       .hero, .grid { grid-template-columns: 1fr; }
-      .features, .steps { grid-template-columns: 1fr; }
       .summary-card { position: static; }
       .toolbar { grid-template-columns: 1fr; }
-      .topbar { top: 8px; }
     }
 
-    @media (max-width: 620px) {
-      .container { width: min(100% - 22px, 1180px); padding-top: 10px; }
-      .topbar { border-radius: 22px; align-items: flex-start; flex-direction: column; }
-      .top-actions { width: 100%; }
-      .pill { flex: 1; text-align: center; padding-inline: 8px; }
-      .hero-card, .order-card, .summary-card, .promo-card { padding: 19px; border-radius: 24px; }
+    @media (max-width: 560px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .top-whatsapp { width: 100%; text-align: center; }
+      .hero-card, .order-card, .summary-card, .info-card { padding: 18px; border-radius: 22px; }
       .form-grid { grid-template-columns: 1fr; }
-      .book { grid-template-columns: auto 1fr; align-items: start; }
-      .book-side { grid-column: 2; justify-items: stretch; }
-      .quantity-box { justify-content: space-between; }
-      .floating-whatsapp { left: 12px; bottom: 12px; font-size: 13px; padding: 12px 13px; }
-      h1 { letter-spacing: 0; }
+      .book { grid-template-columns: auto 1fr; }
+      .book-side { grid-column: 2; justify-items: start; grid-template-columns: auto auto; align-items: center; }
+      .category-tabs { display: none; }
+      .category-mobile-select { display: block; }
     }
   </style>
 </head>
@@ -662,56 +551,40 @@
       <div class="brand">
         <div class="logo">📚</div>
         <div>
-          <div>مكتبة مازن</div>
-          <div class="small-muted">نظام طلبات الكتب</div>
+          <div>مكتبة الطباعة</div>
+          <small>نظام طلبات الكتب</small>
         </div>
       </div>
-      <div class="top-actions">
-        <span class="pill">⚡ طلب أسرع</span>
-        <span class="pill">✅ تأكيد التواصل</span>
-        <span class="pill">🧾 تسجيل تلقائي</span>
-      </div>
+      <a class="top-whatsapp" id="catalogWhatsApp" target="_blank" rel="noopener">استفسار سريع</a>
     </header>
 
     <section class="hero">
-      <div class="hero-card card">
-        <div class="badge">📌 طريقة طلب أسهل وأوضح</div>
-        <h1>اطلب كتبك <span class="gradient-text">من غير انتظار</span></h1>
-        <p>اختار الكتب، حدد العدد، وابعت الطلب في أقل من دقيقة. بعد الإرسال بنراجع التفاصيل ونتواصل معاك للتأكيد.</p>
-        <div class="hero-buttons">
-          <a class="hero-link primary" href="#orderSection">ابدأ الطلب الآن 🚀</a>
-          <a class="hero-link secondary" id="catalogWhatsApp" target="_blank" rel="noopener">استفسار واتساب 💬</a>
-        </div>
-        <div class="steps">
-          <div class="step"><span>1</span> اكتب الاسم ورقم التواصل</div>
-          <div class="step"><span>2</span> اختار الكتب والعدد</div>
-          <div class="step"><span>3</span> ابعت الطلب وهنتواصل معاك</div>
+      <div class="hero-card">
+        <div class="badge">طلب كتب أونلاين</div>
+        <h1>اطلب كتبك <span class="blue">بسهولة</span></h1>
+        <p>اختار الصف، حدد الكتب وعدد النسخ، وسجل بياناتك. الطلب بيتسجل تلقائيًا عندنا من غير لخبطة أو تأخير.</p>
+        <div class="hero-actions">
+          <a class="hero-btn primary" href="#orderSection">ابدأ الطلب الآن</a>
+          <a class="hero-btn light" href="#booksList">شوف الكتب</a>
         </div>
       </div>
 
-      <div class="promo-card card">
-        <h2>كل طلبك متسجل ومنظم</h2>
-        <p>الطلب بيوصلنا بتفاصيل الكتب والكميات والإجمالي، فبنقدر نراجع ونجهز بشكل أسرع ومن غير لخبطة.</p>
-        <div class="stats">
-          <div class="stat"><strong>24/7</strong><span>استقبال الطلبات</span></div>
-          <div class="stat"><strong>واتساب</strong><span>تأكيد ومتابعة</span></div>
-          <div class="stat"><strong>سهل</strong><span>بحث وتصنيف</span></div>
-          <div class="stat"><strong>منظم</strong><span>ملخص فوري</span></div>
+      <div class="info-card">
+        <h2>خطوات الطلب</h2>
+        <p>السيستم معمول عشان الطلب يبقى واضح وسريع.</p>
+        <div class="mini-steps">
+          <div class="mini-step"><span>1</span> اكتب بياناتك</div>
+          <div class="mini-step"><span>2</span> اختار الكتب والعدد</div>
+          <div class="mini-step"><span>3</span> يتم التواصل خلال 10 - 15 يوم</div>
         </div>
       </div>
-    </section>
-
-    <section class="features">
-      <div class="feature-card"><div class="feature-icon">🔎</div><div><h3>بحث سريع</h3><p>ابحث باسم الكتاب، المادة، أو الصف الدراسي.</p></div></div>
-      <div class="feature-card"><div class="feature-icon">🧮</div><div><h3>حساب تلقائي</h3><p>الإجمالي بيتحدث فورًا حسب الكمية المختارة.</p></div></div>
-      <div class="feature-card"><div class="feature-icon">✅</div><div><h3>تأكيد واضح</h3><p>بعد الطلب هتظهر رسالة نجاح ورابط واتساب للمتابعة.</p></div></div>
     </section>
 
     <section class="grid" id="orderSection">
-      <form class="order-card card" id="orderForm">
+      <form class="order-card" id="orderForm">
         <div class="section-head">
           <h2 class="section-title">بيانات الطلب</h2>
-          <span class="small-muted">املأ البيانات للتأكيد</span>
+          <span class="small-muted">خطوة 1 من 2</span>
         </div>
 
         <div class="form-grid">
@@ -721,7 +594,7 @@
           </div>
           <div>
             <label class="field-label" for="phone">رقم التواصل</label>
-            <input id="phone" name="phone" inputmode="tel" placeholder="مثال: 01012345678" required />
+            <input id="phone" name="phone" placeholder="مثال: 01012345678" required />
           </div>
           <div class="full">
             <label class="field-label" for="deliveryMethod">طريقة الاستلام</label>
@@ -736,29 +609,32 @@
           </div>
         </div>
 
-        <div class="section-head">
-          <h2 class="section-title">اختار الكتب</h2>
-          <span class="small-muted" id="visibleCount">0 كتاب</span>
-        </div>
+        <div class="step-title"><span>2</span> اختار الكتب</div>
 
         <div class="toolbar">
-          <input id="searchInput" type="search" placeholder="ابحث باسم الكتاب أو المادة أو الصف..." />
+          <input id="searchInput" type="search" placeholder="ابحث باسم الكتاب أو المادة..." />
           <select id="sortSelect">
             <option value="default">الترتيب الافتراضي</option>
-            <option value="priceLow">السعر: من الأقل للأعلى</option>
-            <option value="priceHigh">السعر: من الأعلى للأقل</option>
-            <option value="popular">الأكثر طلبًا أولًا</option>
+            <option value="priceLow">السعر: الأقل أولًا</option>
+            <option value="priceHigh">السعر: الأعلى أولًا</option>
+            <option value="popular">الأكثر طلبًا</option>
           </select>
         </div>
 
         <div class="category-tabs" id="categoryTabs"></div>
+        <select class="category-mobile-select" id="categoryMobileSelect" aria-label="اختيار الصف"></select>
+        <div class="section-head">
+          <span class="small-muted" id="visibleCount">0 كتاب</span>
+        </div>
         <div class="books" id="booksList"></div>
       </form>
 
-      <aside class="summary-card card">
+      <aside class="summary-card">
         <h2 class="section-title">ملخص الطلب</h2>
-        <div class="summary-line"><span>عدد الأنواع المختارة</span><strong id="booksCount">0</strong></div>
-        <div class="summary-line"><span>الحالة</span><strong class="status-pill">Pending</strong></div>
+        <div class="summary-box">
+          <div class="summary-line"><span>عدد الكتب المختارة</span><strong id="booksCount">0</strong></div>
+          <div class="summary-line"><span>حالة الطلب</span><strong>Pending</strong></div>
+        </div>
         <ul class="selected-list" id="selectedList"></ul>
         <div class="total"><span>الإجمالي</span><span id="totalPrice">0 ج.م</span></div>
         <button class="submit-button" id="submitBtn" type="submit" form="orderForm">إرسال الطلب</button>
@@ -769,20 +645,18 @@
           <div>📦 الطلب هيتراجع ويتجهز حسب المتاح</div>
           <div>💬 هنستخدم رقم التواصل لتأكيد الطلب</div>
         </div>
-        <p class="note">بعد إرسال الطلب، هنراجع التفاصيل ويتم التواصل مع حضرتك لمتابعة الطلب.</p>
+        <p class="note">بعد إرسال الطلب، هنراجع التفاصيل ونتواصل مع حضرتك لمتابعة الطلب.</p>
       </aside>
     </section>
 
-    <footer>© مكتبة مازن - نظام الطلبات</footer>
+    <footer>© مكتبة الطباعة - نظام الطلبات</footer>
   </main>
-
-  <a class="floating-whatsapp" id="floatingWhatsApp" target="_blank" rel="noopener">واتساب مباشر 💬</a>
 
   <div class="success-modal" id="successModal">
     <div class="modal-card">
       <div class="modal-icon">✓</div>
-      <h2>تم تسجيل طلبك بنجاح ✅</h2>
-      <p>هنراجع التفاصيل ونتواصل مع حضرتك لمتابعة الطلب.</p>
+      <h2>تم تسجيل طلبك بنجاح</h2>
+      <p>سيتم التواصل مع حضرتك خلال 10 - 15 يوم لمتابعة الطلب.</p>
       <button class="submit-button" id="closeModalBtn" type="button">تمام</button>
     </div>
   </div>
@@ -792,21 +666,22 @@
     var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_lvNdRGCyay_OterEgL-ca7KGVckvrXytt2Bof-LNALgNRgChmnMJwpj_0jlpp7oQGg/exec";
 
     var books = [
-      { id: 1, title: "كتاب عربي", subject: "لغة عربية", category: "الصف الاول الابتدائي", pages: 120, price: 80, popular: true, isNew: false },
-      { id: 2, title: "كتاب حساب", subject: "رياضيات", category: "الصف الثاني الابتدائي", pages: 130, price: 90, popular: true, isNew: false },
-      { id: 3, title: "كتاب علوم", subject: "Science", category: "الصف الثالث الابتدائي", pages: 140, price: 95, popular: false, isNew: false },
-      { id: 4, title: "كتاب دراسات", subject: "Social", category: "الصف الرابع الابتدائي", pages: 150, price: 100, popular: true, isNew: true },
-      { id: 5, title: "كتاب انجليزي", subject: "English", category: "الصف الخامس الابتدائي", pages: 160, price: 110, popular: false, isNew: false },
-      { id: 6, title: "مراجعة نهائية", subject: "Revision", category: "الصف السادس الابتدائي", pages: 100, price: 70, popular: true, isNew: true },
-      { id: 7, title: "كتاب جبر", subject: "Math", category: "الصف الاول الاعدادي", pages: 170, price: 120, popular: true, isNew: false },
-      { id: 8, title: "كتاب هندسة", subject: "Geometry", category: "الصف الثاني الاعدادي", pages: 180, price: 130, popular: false, isNew: false },
-      { id: 9, title: "ملزمة مراجعة", subject: "Final", category: "الصف الثالث الاعدادي", pages: 110, price: 85, popular: true, isNew: true }
+      { id: 1, title: "كتاب عربي", subject: "لغة عربية", category: "الصف الاول الابتدائي", price: 80, popular: true, isNew: false },
+      { id: 2, title: "كتاب حساب", subject: "رياضيات", category: "الصف الثاني الابتدائي", price: 90, popular: true, isNew: false },
+      { id: 3, title: "كتاب علوم", subject: "Science", category: "الصف الثالث الابتدائي", price: 95, popular: false, isNew: false },
+      { id: 4, title: "كتاب دراسات", subject: "Social", category: "الصف الرابع الابتدائي", price: 100, popular: true, isNew: true },
+      { id: 5, title: "كتاب انجليزي", subject: "English", category: "الصف الخامس الابتدائي", price: 110, popular: false, isNew: false },
+      { id: 6, title: "مراجعة نهائية", subject: "Revision", category: "الصف السادس الابتدائي", price: 70, popular: true, isNew: true },
+      { id: 7, title: "كتاب جبر", subject: "Math", category: "الصف الاول الاعدادي", price: 120, popular: true, isNew: false },
+      { id: 8, title: "كتاب هندسة", subject: "Geometry", category: "الصف الثاني الاعدادي", price: 130, popular: false, isNew: false },
+      { id: 9, title: "ملزمة مراجعة", subject: "Final", category: "الصف الثالث الاعدادي", price: 85, popular: true, isNew: true }
     ];
 
     var booksList = document.getElementById("booksList");
     var searchInput = document.getElementById("searchInput");
     var sortSelect = document.getElementById("sortSelect");
     var categoryTabs = document.getElementById("categoryTabs");
+    var categoryMobileSelect = document.getElementById("categoryMobileSelect");
     var visibleCount = document.getElementById("visibleCount");
     var booksCount = document.getElementById("booksCount");
     var selectedList = document.getElementById("selectedList");
@@ -815,7 +690,6 @@
     var submitBtn = document.getElementById("submitBtn");
     var messageBox = document.getElementById("messageBox");
     var whatsappBtn = document.getElementById("whatsappBtn");
-    var floatingWhatsApp = document.getElementById("floatingWhatsApp");
     var catalogWhatsApp = document.getElementById("catalogWhatsApp");
     var successModal = document.getElementById("successModal");
     var closeModalBtn = document.getElementById("closeModalBtn");
@@ -825,19 +699,9 @@
     var activeCategory = "الكل";
     var lastOrderWhatsAppLink = "";
 
-    function setupWhatsAppLinks() {
+    function setupWhatsAppLink() {
       var text = encodeURIComponent("أهلاً، عندي استفسار بخصوص طلب الكتب.");
-      var link = "https://wa.me/" + STORE_WHATSAPP_NUMBER + "?text=" + text;
-      floatingWhatsApp.href = link;
-      catalogWhatsApp.href = link;
-    }
-
-    function getCategories() {
-      var categories = ["الكل"];
-      for (var i = 0; i < books.length; i++) {
-        if (categories.indexOf(books[i].category) === -1) categories.push(books[i].category);
-      }
-      return categories;
+      catalogWhatsApp.href = "https://wa.me/" + STORE_WHATSAPP_NUMBER + "?text=" + text;
     }
 
     function escapeHtml(value) {
@@ -849,19 +713,34 @@
         .replace(/'/g, "&#039;");
     }
 
+    function getCategories() {
+      var categories = ["الكل"];
+      for (var i = 0; i < books.length; i++) {
+        if (categories.indexOf(books[i].category) === -1) categories.push(books[i].category);
+      }
+      return categories;
+    }
+
     function renderCategories() {
       var categories = getCategories();
       var html = "";
+      var selectHtml = "";
+
       for (var i = 0; i < categories.length; i++) {
         var activeClass = categories[i] === activeCategory ? " active" : "";
         html += "<button type=\"button\" class=\"tab" + activeClass + "\" data-category=\"" + escapeHtml(categories[i]) + "\">" + escapeHtml(categories[i]) + "</button>";
+        selectHtml += "<option value=\"" + escapeHtml(categories[i]) + "\">" + escapeHtml(categories[i]) + "</option>";
       }
+
       categoryTabs.innerHTML = html;
+      categoryMobileSelect.innerHTML = selectHtml;
+      categoryMobileSelect.value = activeCategory;
 
       var tabs = categoryTabs.querySelectorAll(".tab");
       for (var t = 0; t < tabs.length; t++) {
         tabs[t].addEventListener("click", function () {
           activeCategory = this.getAttribute("data-category");
+          categoryMobileSelect.value = activeCategory;
           renderCategories();
           renderBooks();
         });
@@ -871,7 +750,6 @@
     function getFilteredBooks() {
       var filter = searchInput.value.trim().toLowerCase();
       var filtered = [];
-
       for (var i = 0; i < books.length; i++) {
         var book = books[i];
         var matchesSearch = book.title.toLowerCase().indexOf(filter) !== -1 || book.subject.toLowerCase().indexOf(filter) !== -1 || book.category.toLowerCase().indexOf(filter) !== -1;
@@ -882,7 +760,6 @@
       if (sortSelect.value === "priceLow") filtered.sort(function (a, b) { return a.price - b.price; });
       if (sortSelect.value === "priceHigh") filtered.sort(function (a, b) { return b.price - a.price; });
       if (sortSelect.value === "popular") filtered.sort(function (a, b) { return Number(b.popular) - Number(a.popular); });
-
       return filtered;
     }
 
@@ -891,7 +768,7 @@
       visibleCount.textContent = filteredBooks.length + " كتاب";
 
       if (filteredBooks.length === 0) {
-        booksList.innerHTML = "<div class=\"empty-state\">مش لاقي الكتاب؟ اكتب اسمه في الملاحظات أو ابعتلنا واتساب وهنرد عليك.</div>";
+        booksList.innerHTML = "<div class=\"empty-state\">مش لاقي الكتاب؟ اكتب اسمه في الملاحظات أو ابعت استفسار سريع.</div>";
         return;
       }
 
@@ -899,22 +776,21 @@
       for (var i = 0; i < filteredBooks.length; i++) {
         var book = filteredBooks[i];
         var checked = selectedBooks.indexOf(book.id) !== -1;
+        var qty = bookQuantities[book.id] || 1;
         html += "<label class=\"book" + (checked ? " selected" : "") + "\" for=\"book-" + book.id + "\">";
         html += "<input type=\"checkbox\" id=\"book-" + book.id + "\" value=\"" + book.id + "\"" + (checked ? " checked" : "") + " />";
         html += "<div>";
         html += "<div class=\"book-title\">" + escapeHtml(book.title) + "</div>";
-        html += "<div class=\"book-meta\">" + escapeHtml(book.subject)  + " - " + escapeHtml(book.category) + "</div>";
+        html += "<div class=\"book-meta\">" + escapeHtml(book.subject) + " - " + escapeHtml(book.category) + "</div>";
         html += "<div class=\"tag-row\">";
         if (book.popular) html += "<span class=\"book-tag hot\">الأكثر طلبًا</span>";
         if (book.isNew) html += "<span class=\"book-tag new\">جديد</span>";
         html += "</div></div>";
         html += "<div class=\"book-side\">";
         html += "<div class=\"price\">" + book.price + " ج.م</div>";
-        html += "<div class=\"quantity-box\"><span>العدد</span><input class=\"quantity-input\" type=\"number\" min=\"1\" value=\"" + (bookQuantities[book.id] || 1) + "\" data-id=\"" + book.id + "\" /></div>";
-        html += "</div>";
-        html += "</label>";
+        html += "<div class=\"quantity-box\"><span>العدد</span><input class=\"quantity-input\" type=\"number\" min=\"1\" value=\"" + qty + "\" data-id=\"" + book.id + "\" /></div>";
+        html += "</div></label>";
       }
-
       booksList.innerHTML = html;
 
       var checkboxes = booksList.querySelectorAll("input[type='checkbox']");
@@ -934,15 +810,12 @@
         });
       }
 
-      var quantityInputs = booksList.querySelectorAll(".quantity-input");
-      for (var q = 0; q < quantityInputs.length; q++) {
-        quantityInputs[q].addEventListener("click", function (event) {
-          event.stopPropagation();
-        });
-        quantityInputs[q].addEventListener("change", function () {
+      var qtyInputs = booksList.querySelectorAll(".quantity-input");
+      for (var q = 0; q < qtyInputs.length; q++) {
+        qtyInputs[q].addEventListener("click", function (event) { event.preventDefault(); event.stopPropagation(); });
+        qtyInputs[q].addEventListener("change", function () {
           var bookId = Number(this.getAttribute("data-id"));
           var quantity = Math.max(1, Number(this.value || 1));
-          this.value = quantity;
           bookQuantities[bookId] = quantity;
           if (selectedBooks.indexOf(bookId) === -1) selectedBooks.push(bookId);
           renderBooks();
@@ -952,9 +825,7 @@
     }
 
     function getSelectedBooksData() {
-      return books.filter(function (book) {
-        return selectedBooks.indexOf(book.id) !== -1;
-      });
+      return books.filter(function (book) { return selectedBooks.indexOf(book.id) !== -1; });
     }
 
     function updateSummary() {
@@ -964,14 +835,14 @@
       totalPrice.textContent = total + " ج.م";
 
       if (selected.length === 0) {
-        selectedList.innerHTML = "<li><span>لسه مختارتش كتب</span></li>";
+        selectedList.innerHTML = "<li><span>لم يتم اختيار كتب بعد</span></li>";
         return;
       }
 
       var html = "";
       for (var i = 0; i < selected.length; i++) {
         var qty = bookQuantities[selected[i].id] || 1;
-        html += "<li><span>" + escapeHtml(selected[i].title) + " × " + qty + "<br><strong>" + (selected[i].price * qty) + " ج.م</strong></span><button type=\"button\" class=\"remove-item\" data-id=\"" + selected[i].id + "\">حذف</button></li>";
+        html += "<li><span>" + escapeHtml(selected[i].title) + " × " + qty + " - " + (selected[i].price * qty) + " ج.م</span><button type=\"button\" class=\"remove-item\" data-id=\"" + selected[i].id + "\">حذف</button></li>";
       }
       selectedList.innerHTML = html;
 
@@ -1007,6 +878,24 @@
       return "https://wa.me/" + STORE_WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
     }
 
+    function runTests() {
+      console.assert(getCategories().indexOf("الكل") !== -1, "Test failed: categories should include الكل");
+      console.assert(getCategories().indexOf("الصف الاول الابتدائي") !== -1, "Test failed: categories should include الصف الاول الابتدائي");
+      console.assert(normalizePhone("015-545 96691") === "01554596691", "Test failed: phone normalization");
+      console.assert(escapeHtml("<test>") === "&lt;test&gt;", "Test failed: escapeHtml should escape tags");
+      console.assert(typeof renderBooks === "function", "Test failed: renderBooks should exist");
+      console.assert(typeof updateSummary === "function", "Test failed: updateSummary should exist");
+      console.assert(categoryMobileSelect !== null, "Test failed: mobile category select should exist");
+      renderCategories();
+      console.assert(categoryMobileSelect.options.length === getCategories().length, "Test failed: mobile select should include all categories");
+    }
+
+    categoryMobileSelect.addEventListener("change", function () {
+      activeCategory = categoryMobileSelect.value;
+      renderCategories();
+      renderBooks();
+    });
+
     searchInput.addEventListener("input", renderBooks);
     sortSelect.addEventListener("change", renderBooks);
     closeModalBtn.addEventListener("click", function () { successModal.classList.remove("show"); });
@@ -1027,7 +916,7 @@
       var phone = normalizePhone(document.getElementById("phone").value.trim());
 
       if (phone.length < 10) {
-        showMessage("error", "اكتب رقم التواصل صحيح عشان نقدر نأكد معاك الطلب.");
+        showMessage("error", "اكتب رقم تواصل صحيح عشان نقدر نتابع الطلب.");
         return;
       }
 
@@ -1071,17 +960,18 @@
         renderBooks();
         updateSummary();
       }).catch(function () {
-        showMessage("error", "حصلت مشكلة أثناء إرسال الطلب. جرّب تاني أو تواصل معانا على واتساب.");
+        showMessage("error", "حصلت مشكلة أثناء إرسال الطلب. جرّب تاني أو ابعت استفسار سريع.");
       }).finally(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = "إرسال الطلب";
       });
     });
 
-    setupWhatsAppLinks();
+    setupWhatsAppLink();
     renderCategories();
     renderBooks();
     updateSummary();
+    runTests();
   </script>
 </body>
 </html>
