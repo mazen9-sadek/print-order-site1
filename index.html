@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>طلب كتب - مكتبة الطباعة</title>
+  <title>طلب كتب - مكتبة مازن</title>
   <style>
     :root {
       --primary: #2563eb;
@@ -842,7 +842,7 @@
       var html = "";
       for (var i = 0; i < selected.length; i++) {
         var qty = bookQuantities[selected[i].id] || 1;
-        html += "<li><span>" + escapeHtml(selected[i].title) + " × " + qty + " - " + (selected[i].price * qty) + " ج.م</span><button type=\"button\" class=\"remove-item\" data-id=\"" + selected[i].id + "\">حذف</button></li>";
+        html += "<li><span>" + escapeHtml(selected[i].title) + " (" + selected[i].category + ") × " + qty + " - " + (selected[i].price * qty) + " ج.م</span><button type=\"button\" class=\"remove-item\" data-id=\"" + selected[i].id + "\">حذف</button></li>";
       }
       selectedList.innerHTML = html;
 
