@@ -8,16 +8,20 @@
     :root {
       --primary: #2563eb;
       --primary-dark: #1d4ed8;
-      --bg: #f8fafc;
-      --card: #ffffff;
+      --green: #16a34a;
+      --red: #dc2626;
       --text: #0f172a;
       --muted: #64748b;
       --border: #e2e8f0;
-      --success: #16a34a;
-      --danger: #dc2626;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --soft-blue: #eff6ff;
+      --soft-green: #ecfdf5;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -28,162 +32,215 @@
     }
 
     .container {
-      width: min(1100px, 92%);
+      width: min(1120px, 94%);
       margin: auto;
-      padding: 28px 0 50px;
+      padding: 18px 0 48px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 25px rgba(15,23,42,0.05);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: var(--primary);
+      color: white;
+      font-size: 22px;
+    }
+
+    .brand small { display: block; color: var(--muted); margin-top: 3px; }
+
+    .top-whatsapp {
+      text-decoration: none;
+      background: #22c55e;
+      color: white;
+      padding: 11px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      white-space: nowrap;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 24px;
-      align-items: center;
-      margin-bottom: 24px;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 16px;
+      margin-bottom: 16px;
     }
 
-    .hero-card, .order-card, .summary-card {
-      background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(226,232,240,0.9);
-      border-radius: 28px;
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    .hero-card, .info-card, .order-card, .summary-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
     }
 
-    .hero-card {
-      padding: 34px;
-    }
+    .hero-card { padding: 28px; }
 
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      display: inline-block;
       background: #dbeafe;
       color: #1e40af;
-      padding: 9px 14px;
+      padding: 8px 13px;
       border-radius: 999px;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 14px;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 12px;
     }
 
     h1 {
-      font-size: clamp(30px, 5vw, 54px);
+      margin: 0 0 12px;
+      font-size: clamp(30px, 5vw, 52px);
       line-height: 1.12;
-      margin: 0 0 14px;
       letter-spacing: -1px;
     }
 
-    .hero p {
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.8;
-      margin: 0 0 22px;
-    }
+    .blue { color: var(--primary); }
+    .hero-card p, .info-card p, .note { color: var(--muted); line-height: 1.8; }
 
-    .steps {
-      display: grid;
+    .hero-actions {
+      display: flex;
       gap: 10px;
+      flex-wrap: wrap;
       margin-top: 18px;
     }
 
-    .step {
-      display: flex;
-      gap: 10px;
+    .hero-btn {
+      border: 0;
+      text-decoration: none;
+      display: inline-flex;
       align-items: center;
-      color: #334155;
-      font-weight: 700;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 17px;
+      border-radius: 16px;
+      font-weight: 900;
+      cursor: pointer;
+      font-family: inherit;
     }
 
-    .step span {
+    .hero-btn.primary { background: var(--primary); color: white; }
+    .hero-btn.light { background: #f1f5f9; color: #1e293b; border: 1px solid var(--border); }
+
+    .info-card {
+      padding: 22px;
+      background: linear-gradient(145deg, #0f172a, #1e3a8a);
+      color: white;
+      overflow: hidden;
+    }
+
+    .info-card p { color: #cbd5e1; margin-bottom: 18px; }
+
+    .mini-steps {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px;
+      padding: 12px;
+      font-weight: 800;
+    }
+
+    .mini-step span {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: white;
+      color: var(--primary);
+      flex: 0 0 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(310px, 0.75fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .order-card, .summary-card { padding: 22px; }
+    .summary-card { position: sticky; top: 14px; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .section-title { margin: 0; font-size: 23px; }
+    .small-muted { color: var(--muted); font-size: 13px; font-weight: 800; }
+
+    .step-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 22px 0 12px;
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .step-title span {
       width: 28px;
       height: 28px;
       display: grid;
       place-items: center;
       border-radius: 50%;
-      background: #e0f2fe;
-      color: #0369a1;
-      flex: 0 0 28px;
-    }
-
-    .mini-card {
-      padding: 26px;
-      background: #0f172a;
+      background: var(--primary);
       color: white;
-      border-radius: 28px;
-      min-height: 270px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .mini-card::after {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      background: rgba(59,130,246,0.35);
-      border-radius: 50%;
-      left: -60px;
-      bottom: -70px;
-      filter: blur(2px);
-    }
-
-    .mini-card h2 {
-      position: relative;
-      margin: 0;
-      font-size: 30px;
-      z-index: 1;
-    }
-
-    .mini-card p {
-      position: relative;
-      color: #cbd5e1;
-      z-index: 1;
-      font-size: 16px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1.45fr 0.75fr;
-      gap: 24px;
-      align-items: start;
-    }
-
-    .order-card, .summary-card {
-      padding: 26px;
-    }
-
-    .section-title {
-      margin: 0 0 18px;
-      font-size: 24px;
+      font-size: 14px;
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-bottom: 20px;
+      gap: 12px;
     }
 
-    label {
+    .full { grid-column: 1 / -1; }
+
+    label.field-label {
       display: block;
-      font-weight: 700;
+      font-weight: 900;
       margin-bottom: 7px;
-      color: #1e293b;
     }
 
     input, select, textarea {
       width: 100%;
-      padding: 13px 14px;
+      padding: 14px 15px;
       border: 1px solid var(--border);
       border-radius: 16px;
       font-size: 15px;
-      background: white;
-      color: var(--text);
-      outline: none;
-      transition: 0.2s;
       font-family: inherit;
+      outline: none;
+      background: white;
     }
 
     input:focus, select:focus, textarea:focus {
@@ -191,25 +248,46 @@
       box-shadow: 0 0 0 4px rgba(37,99,235,0.12);
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 90px;
-    }
-
-    .full { grid-column: 1 / -1; }
+    textarea { min-height: 86px; resize: vertical; }
 
     .toolbar {
-      display: flex;
-      gap: 12px;
-      margin: 6px 0 16px;
+      display: grid;
+      grid-template-columns: 1fr 210px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
-    .toolbar input { flex: 1; }
+    .category-tabs {
+      display: flex;
+      gap: 8px;
+      overflow: auto;
+      padding: 4px 0 12px;
+      margin-bottom: 4px;
+    }
+
+    .tab {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: #334155;
+      border-radius: 999px;
+      padding: 9px 14px;
+      white-space: nowrap;
+      cursor: pointer;
+      font-weight: 900;
+      width: auto;
+      font-family: inherit;
+    }
+
+    .tab.active, .tab:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
 
     .books {
       display: grid;
-      gap: 12px;
-      max-height: 430px;
+      gap: 10px;
+      max-height: 560px;
       overflow: auto;
       padding-left: 4px;
     }
@@ -223,51 +301,88 @@
       border-radius: 20px;
       padding: 14px;
       background: #fff;
-      transition: 0.2s;
+      cursor: pointer;
+      transition: 0.15s;
     }
 
-    .book:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
-    }
+    .book:hover { border-color: #bfdbfe; transform: translateY(-1px); }
+    .book.selected { border-color: var(--primary); background: var(--soft-blue); }
 
     .book input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       accent-color: var(--primary);
     }
 
-    .book-title {
-      font-weight: 800;
-      margin-bottom: 4px;
+    .book-title { font-weight: 900; margin-bottom: 5px; }
+    .book-meta { color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .price { font-weight: 900; color: var(--primary-dark); white-space: nowrap; }
+
+    .book-side {
+      display: grid;
+      gap: 8px;
+      justify-items: end;
     }
 
-    .book-meta {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .price {
+    .quantity-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
       font-weight: 900;
-      color: var(--primary-dark);
-      white-space: nowrap;
+      color: #334155;
     }
 
-    .summary-card {
-      position: sticky;
-      top: 18px;
+    .quantity-input {
+      width: 64px;
+      padding: 8px 8px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+
+    .book-tag {
+      font-size: 12px;
+      font-weight: 900;
+      border-radius: 999px;
+      padding: 5px 8px;
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .book-tag.hot { background: #ffedd5; color: #c2410c; }
+    .book-tag.new { background: #dcfce7; color: #166534; }
+
+    .empty-state {
+      text-align: center;
+      padding: 24px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 20px;
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.7;
+    }
+
+    .summary-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 12px;
+      margin: 12px 0;
     }
 
     .summary-line {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
-      padding: 12px 0;
+      padding: 10px 0;
       border-bottom: 1px solid var(--border);
       color: #334155;
     }
 
-    .summary-line strong { color: var(--text); }
+    .summary-line:last-child { border-bottom: 0; }
 
     .selected-list {
       margin: 12px 0;
@@ -277,28 +392,45 @@
       gap: 8px;
       color: #334155;
       font-size: 14px;
+      max-height: 230px;
+      overflow: auto;
     }
 
     .selected-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
       background: #f1f5f9;
-      border-radius: 12px;
-      padding: 9px 10px;
+      border-radius: 13px;
+      padding: 10px 11px;
+      line-height: 1.5;
+    }
+
+    .remove-item {
+      border: 0;
+      background: transparent;
+      color: var(--red);
+      font-weight: 900;
+      cursor: pointer;
+      width: auto;
+      padding: 0;
+      font-family: inherit;
     }
 
     .total {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #eff6ff;
+      background: #dbeafe;
       color: #1e3a8a;
       padding: 16px;
       border-radius: 18px;
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 900;
-      margin: 16px 0;
+      margin: 14px 0;
     }
 
-    button {
+    .submit-button {
       width: 100%;
       border: 0;
       background: var(--primary);
@@ -308,278 +440,483 @@
       padding: 15px 18px;
       border-radius: 18px;
       cursor: pointer;
-      transition: 0.2s;
       font-family: inherit;
-    }
-
-    button:hover { background: var(--primary-dark); transform: translateY(-1px); }
-    button:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
-
-    .whatsapp-btn {
-      margin-top: 10px;
-      background: #22c55e;
-      display: none;
       text-align: center;
-      text-decoration: none;
-      color: white;
-      font-size: 16px;
-      font-weight: 900;
-      padding: 14px;
-      border-radius: 18px;
     }
 
-    .whatsapp-btn:hover { background: #16a34a; }
+    .submit-button:disabled { opacity: 0.65; cursor: not-allowed; }
 
     .message {
       margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
+      padding: 13px 14px;
+      border-radius: 15px;
       display: none;
-      font-weight: 700;
+      font-weight: 800;
       line-height: 1.7;
     }
 
     .message.success { background: #dcfce7; color: #166534; display: block; }
     .message.error { background: #fee2e2; color: #991b1b; display: block; }
 
-    .note {
-      color: var(--muted);
+    .trust-box {
+      margin-top: 14px;
+      display: grid;
+      gap: 8px;
+      color: #334155;
       font-size: 13px;
-      line-height: 1.7;
-      margin-top: 12px;
+      font-weight: 800;
     }
 
-    footer {
+    .trust-box div {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px;
+    }
+
+    .success-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.45);
+      z-index: 50;
+      padding: 20px;
+    }
+
+    .success-modal.show { display: flex; }
+
+    .modal-card {
+      width: min(430px, 100%);
+      background: white;
+      border-radius: 28px;
+      padding: 26px;
       text-align: center;
-      color: var(--muted);
-      margin-top: 28px;
-      font-size: 14px;
+      box-shadow: var(--shadow);
     }
 
-    @media (max-width: 850px) {
+    .modal-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #dcfce7;
+      color: #16a34a;
+      font-size: 34px;
+    }
+
+    footer { text-align: center; color: var(--muted); margin-top: 28px; font-size: 14px; }
+
+    @media (max-width: 900px) {
       .hero, .grid { grid-template-columns: 1fr; }
-      .form-grid { grid-template-columns: 1fr; }
       .summary-card { position: static; }
+      .toolbar { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .top-whatsapp { width: 100%; text-align: center; }
+      .hero-card, .order-card, .summary-card, .info-card { padding: 18px; border-radius: 22px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .book { grid-template-columns: auto 1fr; }
+      .book-side { grid-column: 2; justify-items: start; grid-template-columns: auto auto; align-items: center; }
     }
   </style>
 </head>
 <body>
   <main class="container">
-    <section class="hero">
-      <div class="hero-card">
-        <div class="badge">📚 نظام طلبات جديد</div>
-        <h1>اطلب كتبك بسهولة من غير انتظار</h1>
-        <p>عملنا النظام ده عشان نوفر وقتك وجهدك ونكون أسرع في الرد والتجهيز، من غير لخبطة في الأوردرات أو تأخير عليك.</p>
-        <div class="steps">
-          <div class="step"><span>1</span> اكتب بياناتك</div>
-          <div class="step"><span>2</span> اختار الكتب المطلوبة</div>
-          <div class="step"><span>3</span> ابعت الطلب وهنتواصل معاك واتساب</div>
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">📚</div>
+        <div>
+          <div>مكتبة الطباعة</div>
+          <small>نظام طلبات الكتب</small>
         </div>
       </div>
-      <div class="mini-card">
-        <h2>مكتبة الطباعة</h2>
-        <p>طلبك بيتسجل تلقائيًا عندنا، وبعدها بنأكد معاك على واتساب قبل التجهيز.</p>
-        <p>⚡ أسرع • أرتب • أوضح</p>
+      <a class="top-whatsapp" id="catalogWhatsApp" target="_blank" rel="noopener">استفسار سريع</a>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="badge">طلب كتب أونلاين</div>
+        <h1>اطلب كتبك <span class="blue">بسهولة</span></h1>
+        <p>اختار الصف، حدد الكتب وعدد النسخ، وسجل بياناتك. الطلب بيتسجل تلقائيًا عندنا من غير لخبطة أو تأخير.</p>
+        <div class="hero-actions">
+          <a class="hero-btn primary" href="#orderSection">ابدأ الطلب الآن</a>
+          <a class="hero-btn light" href="#booksList">شوف الكتب</a>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h2>خطوات الطلب</h2>
+        <p>السيستم معمول عشان الطلب يبقى واضح وسريع.</p>
+        <div class="mini-steps">
+          <div class="mini-step"><span>1</span> اكتب بياناتك</div>
+          <div class="mini-step"><span>2</span> اختار الكتب والعدد</div>
+          <div class="mini-step"><span>3</span> يتم التواصل خلال 10 - 15 يوم</div>
+        </div>
       </div>
     </section>
 
-    <section class="grid">
+    <section class="grid" id="orderSection">
       <form class="order-card" id="orderForm">
-        <h2 class="section-title">بيانات الطلب</h2>
+        <div class="section-head">
+          <h2 class="section-title">بيانات الطلب</h2>
+          <span class="small-muted">خطوة 1 من 2</span>
+        </div>
+
         <div class="form-grid">
           <div>
-            <label for="customerName">الاسم</label>
+            <label class="field-label" for="customerName">الاسم</label>
             <input id="customerName" name="customerName" placeholder="اكتب اسمك" required />
           </div>
           <div>
-            <label for="phone">رقم الواتساب</label>
+            <label class="field-label" for="phone">رقم التواصل</label>
             <input id="phone" name="phone" placeholder="مثال: 01012345678" required />
           </div>
-          <div>
-            <label for="deliveryMethod">طريقة الاستلام</label>
+          <div class="full">
+            <label class="field-label" for="deliveryMethod">طريقة الاستلام</label>
             <select id="deliveryMethod" name="deliveryMethod">
               <option value="استلام من المكتبة">استلام من المكتبة</option>
               <option value="توصيل">توصيل</option>
             </select>
           </div>
           <div class="full">
-            <label for="notes">ملاحظات إضافية</label>
-            <textarea id="notes" name="notes" placeholder="مثال: محتاج الكتاب ضروري / عايز تغليف / أي تفاصيل مهمة"></textarea>
+            <label class="field-label" for="notes">ملاحظات إضافية</label>
+            <textarea id="notes" name="notes" placeholder="مثال: محتاجه ضروري / اسأل عن كتاب مش موجود / أي تفاصيل مهمة"></textarea>
           </div>
         </div>
 
-        <h2 class="section-title">اختار الكتب</h2>
+        <div class="step-title"><span>2</span> اختار الكتب</div>
+
         <div class="toolbar">
-          <input id="searchInput" type="search" placeholder="ابحث باسم الكتاب..." />
+          <input id="searchInput" type="search" placeholder="ابحث باسم الكتاب أو المادة..." />
+          <select id="sortSelect">
+            <option value="default">الترتيب الافتراضي</option>
+            <option value="priceLow">السعر: الأقل أولًا</option>
+            <option value="priceHigh">السعر: الأعلى أولًا</option>
+            <option value="popular">الأكثر طلبًا</option>
+          </select>
+        </div>
+
+        <div class="category-tabs" id="categoryTabs"></div>
+        <div class="section-head">
+          <span class="small-muted" id="visibleCount">0 كتاب</span>
         </div>
         <div class="books" id="booksList"></div>
       </form>
 
       <aside class="summary-card">
         <h2 class="section-title">ملخص الطلب</h2>
-        <div class="summary-line"><span>عدد الكتب المختارة</span><strong id="booksCount">0</strong></div>
+        <div class="summary-box">
+          <div class="summary-line"><span>عدد الكتب المختارة</span><strong id="booksCount">0</strong></div>
+          <div class="summary-line"><span>حالة الطلب</span><strong>Pending</strong></div>
+        </div>
         <ul class="selected-list" id="selectedList"></ul>
         <div class="total"><span>الإجمالي</span><span id="totalPrice">0 ج.م</span></div>
-        <button id="submitBtn" type="submit" form="orderForm">إرسال الطلب</button>
-        <a class="whatsapp-btn" id="whatsappBtn" target="_blank" rel="noopener">تأكيد على واتساب</a>
+        <button class="submit-button" id="submitBtn" type="submit" form="orderForm">إرسال الطلب</button>
         <div class="message" id="messageBox"></div>
-        <p class="note">بعد إرسال الطلب، هنراجع التفاصيل ونتواصل معاك على واتساب لتأكيد السعر وميعاد الاستلام.</p>
+        <div class="trust-box">
+          <div>✅ الطلب بيتسجل تلقائيًا عندنا</div>
+          <div>📦 الطلب هيتراجع ويتجهز حسب المتاح</div>
+          <div>⏳ التواصل خلال 10 - 15 يوم لمتابعة الطلب</div>
+        </div>
+        <p class="note">بعد إرسال الطلب، هنراجع التفاصيل ويتم التواصل مع حضرتك خلال 10 - 15 يوم لمتابعة الطلب.</p>
       </aside>
     </section>
 
     <footer>© مكتبة الطباعة - نظام الطلبات</footer>
   </main>
 
+  <div class="success-modal" id="successModal">
+    <div class="modal-card">
+      <div class="modal-icon">✓</div>
+      <h2>تم تسجيل طلبك بنجاح</h2>
+      <p>سيتم التواصل مع حضرتك خلال 10 - 15 يوم لمتابعة الطلب.</p>
+      <button class="submit-button" id="closeModalBtn" type="button">تمام</button>
+    </div>
+  </div>
+
   <script>
-    // 1) غير رقم واتساب المكتبة هنا بصيغة دولية بدون +
-    const STORE_WHATSAPP_NUMBER = "201000000000";
+    var STORE_WHATSAPP_NUMBER = "201554596691";
+    var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_lvNdRGCyay_OterEgL-ca7KGVckvrXytt2Bof-LNALgNRgChmnMJwpj_0jlpp7oQGg/exec";
 
-    // 2) بعد ما تعمل Google Apps Script، حط رابط Web App هنا
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_lvNdRGCyay_OterEgL-ca7KGVckvrXytt2Bof-LNALgNRgChmnMJwpj_0jlpp7oQGg/exec";
-
-    // 3) عدل الكتب والأسعار من هنا بسهولة
-    const books = [
-      { id: 1, title: "كتاب محاسبة مالية", subject: "Accounting", pages: 180, price: 120 },
-      { id: 2, title: "كتاب إدارة الأعمال", subject: "Management", pages: 150, price: 100 },
-      { id: 3, title: "كتاب اقتصاد كلي", subject: "Economics", pages: 210, price: 140 },
-      { id: 4, title: "كتاب نظم معلومات", subject: "Information Systems", pages: 160, price: 110 },
-      { id: 5, title: "كتاب إحصاء", subject: "Statistics", pages: 190, price: 130 },
-      { id: 6, title: "ملزمة مراجعة نهائية", subject: "Revision", pages: 80, price: 70 }
+    var books = [
+      { id: 1, title: "كتاب عربي", subject: "لغة عربية", category: "الصف الاول الابتدائي", price: 80, popular: true, isNew: false },
+      { id: 2, title: "كتاب حساب", subject: "رياضيات", category: "الصف الثاني الابتدائي", price: 90, popular: true, isNew: false },
+      { id: 3, title: "كتاب علوم", subject: "Science", category: "الصف الثالث الابتدائي", price: 95, popular: false, isNew: false },
+      { id: 4, title: "كتاب دراسات", subject: "Social", category: "الصف الرابع الابتدائي", price: 100, popular: true, isNew: true },
+      { id: 5, title: "كتاب انجليزي", subject: "English", category: "الصف الخامس الابتدائي", price: 110, popular: false, isNew: false },
+      { id: 6, title: "مراجعة نهائية", subject: "Revision", category: "الصف السادس الابتدائي", price: 70, popular: true, isNew: true },
+      { id: 7, title: "كتاب جبر", subject: "Math", category: "الصف الاول الاعدادي", price: 120, popular: true, isNew: false },
+      { id: 8, title: "كتاب هندسة", subject: "Geometry", category: "الصف الثاني الاعدادي", price: 130, popular: false, isNew: false },
+      { id: 9, title: "ملزمة مراجعة", subject: "Final", category: "الصف الثالث الاعدادي", price: 85, popular: true, isNew: true }
     ];
 
-    const booksList = document.getElementById("booksList");
-    const searchInput = document.getElementById("searchInput");
-    const booksCount = document.getElementById("booksCount");
-    const selectedList = document.getElementById("selectedList");
-    const totalPrice = document.getElementById("totalPrice");
-    const orderForm = document.getElementById("orderForm");
-    const submitBtn = document.getElementById("submitBtn");
-    const messageBox = document.getElementById("messageBox");
-    const whatsappBtn = document.getElementById("whatsappBtn");
+    var booksList = document.getElementById("booksList");
+    var searchInput = document.getElementById("searchInput");
+    var sortSelect = document.getElementById("sortSelect");
+    var categoryTabs = document.getElementById("categoryTabs");
+    var visibleCount = document.getElementById("visibleCount");
+    var booksCount = document.getElementById("booksCount");
+    var selectedList = document.getElementById("selectedList");
+    var totalPrice = document.getElementById("totalPrice");
+    var orderForm = document.getElementById("orderForm");
+    var submitBtn = document.getElementById("submitBtn");
+    var messageBox = document.getElementById("messageBox");
+    var catalogWhatsApp = document.getElementById("catalogWhatsApp");
+    var successModal = document.getElementById("successModal");
+    var closeModalBtn = document.getElementById("closeModalBtn");
 
-    let selectedBooks = [];
+    var selectedBooks = [];
+    var bookQuantities = {};
+    var activeCategory = "الكل";
 
-    function renderBooks(filter = "") {
-      const normalizedFilter = filter.trim().toLowerCase();
-      const filteredBooks = books.filter(book =>
-        book.title.toLowerCase().includes(normalizedFilter) ||
-        book.subject.toLowerCase().includes(normalizedFilter)
-      );
+    function setupWhatsAppLink() {
+      var text = encodeURIComponent("أهلاً، عندي استفسار بخصوص طلب الكتب.");
+      catalogWhatsApp.href = "https://wa.me/" + STORE_WHATSAPP_NUMBER + "?text=" + text;
+    }
 
-      booksList.innerHTML = filteredBooks.map(book => `
-        <label class="book" for="book-${book.id}">
-          <input type="checkbox" id="book-${book.id}" value="${book.id}" ${selectedBooks.includes(book.id) ? "checked" : ""} />
-          <div>
-            <div class="book-title">${book.title}</div>
-            <div class="book-meta">${book.subject} • ${book.pages} صفحة</div>
-          </div>
-          <div class="price">${book.price} ج.م</div>
-        </label>
-      `).join("");
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
 
-      booksList.querySelectorAll("input[type='checkbox']").forEach(checkbox => {
-        checkbox.addEventListener("change", () => {
-          const bookId = Number(checkbox.value);
-          if (checkbox.checked) {
+    function getCategories() {
+      var categories = ["الكل"];
+      for (var i = 0; i < books.length; i++) {
+        if (categories.indexOf(books[i].category) === -1) categories.push(books[i].category);
+      }
+      return categories;
+    }
+
+    function renderCategories() {
+      var categories = getCategories();
+      var html = "";
+      for (var i = 0; i < categories.length; i++) {
+        var activeClass = categories[i] === activeCategory ? " active" : "";
+        html += "<button type=\"button\" class=\"tab" + activeClass + "\" data-category=\"" + escapeHtml(categories[i]) + "\">" + escapeHtml(categories[i]) + "</button>";
+      }
+      categoryTabs.innerHTML = html;
+
+      var tabs = categoryTabs.querySelectorAll(".tab");
+      for (var t = 0; t < tabs.length; t++) {
+        tabs[t].addEventListener("click", function () {
+          activeCategory = this.getAttribute("data-category");
+          renderCategories();
+          renderBooks();
+        });
+      }
+    }
+
+    function getFilteredBooks() {
+      var filter = searchInput.value.trim().toLowerCase();
+      var filtered = [];
+      for (var i = 0; i < books.length; i++) {
+        var book = books[i];
+        var matchesSearch = book.title.toLowerCase().indexOf(filter) !== -1 || book.subject.toLowerCase().indexOf(filter) !== -1 || book.category.toLowerCase().indexOf(filter) !== -1;
+        var matchesCategory = activeCategory === "الكل" || book.category === activeCategory;
+        if (matchesSearch && matchesCategory) filtered.push(book);
+      }
+
+      if (sortSelect.value === "priceLow") filtered.sort(function (a, b) { return a.price - b.price; });
+      if (sortSelect.value === "priceHigh") filtered.sort(function (a, b) { return b.price - a.price; });
+      if (sortSelect.value === "popular") filtered.sort(function (a, b) { return Number(b.popular) - Number(a.popular); });
+      return filtered;
+    }
+
+    function renderBooks() {
+      var filteredBooks = getFilteredBooks();
+      visibleCount.textContent = filteredBooks.length + " كتاب";
+
+      if (filteredBooks.length === 0) {
+        booksList.innerHTML = "<div class=\"empty-state\">مش لاقي الكتاب؟ اكتب اسمه في الملاحظات أو ابعت استفسار سريع.</div>";
+        return;
+      }
+
+      var html = "";
+      for (var i = 0; i < filteredBooks.length; i++) {
+        var book = filteredBooks[i];
+        var checked = selectedBooks.indexOf(book.id) !== -1;
+        var qty = bookQuantities[book.id] || 1;
+        html += "<label class=\"book" + (checked ? " selected" : "") + "\" for=\"book-" + book.id + "\">";
+        html += "<input type=\"checkbox\" id=\"book-" + book.id + "\" value=\"" + book.id + "\"" + (checked ? " checked" : "") + " />";
+        html += "<div>";
+        html += "<div class=\"book-title\">" + escapeHtml(book.title) + "</div>";
+        html += "<div class=\"book-meta\">" + escapeHtml(book.subject) + " - " + escapeHtml(book.category) + "</div>";
+        html += "<div class=\"tag-row\">";
+        if (book.popular) html += "<span class=\"book-tag hot\">الأكثر طلبًا</span>";
+        if (book.isNew) html += "<span class=\"book-tag new\">جديد</span>";
+        html += "</div></div>";
+        html += "<div class=\"book-side\">";
+        html += "<div class=\"price\">" + book.price + " ج.م</div>";
+        html += "<div class=\"quantity-box\"><span>العدد</span><input class=\"quantity-input\" type=\"number\" min=\"1\" value=\"" + qty + "\" data-id=\"" + book.id + "\" /></div>";
+        html += "</div></label>";
+      }
+      booksList.innerHTML = html;
+
+      var checkboxes = booksList.querySelectorAll("input[type='checkbox']");
+      for (var c = 0; c < checkboxes.length; c++) {
+        checkboxes[c].addEventListener("change", function () {
+          var bookId = Number(this.value);
+          if (this.checked && selectedBooks.indexOf(bookId) === -1) {
             selectedBooks.push(bookId);
-          } else {
-            selectedBooks = selectedBooks.filter(id => id !== bookId);
+            if (!bookQuantities[bookId]) bookQuantities[bookId] = 1;
           }
+          if (!this.checked) {
+            selectedBooks = selectedBooks.filter(function (id) { return id !== bookId; });
+            delete bookQuantities[bookId];
+          }
+          renderBooks();
           updateSummary();
         });
-      });
+      }
+
+      var qtyInputs = booksList.querySelectorAll(".quantity-input");
+      for (var q = 0; q < qtyInputs.length; q++) {
+        qtyInputs[q].addEventListener("click", function (event) { event.preventDefault(); event.stopPropagation(); });
+        qtyInputs[q].addEventListener("change", function () {
+          var bookId = Number(this.getAttribute("data-id"));
+          var quantity = Math.max(1, Number(this.value || 1));
+          bookQuantities[bookId] = quantity;
+          if (selectedBooks.indexOf(bookId) === -1) selectedBooks.push(bookId);
+          renderBooks();
+          updateSummary();
+        });
+      }
     }
 
     function getSelectedBooksData() {
-      return books.filter(book => selectedBooks.includes(book.id));
+      return books.filter(function (book) { return selectedBooks.indexOf(book.id) !== -1; });
     }
 
     function updateSummary() {
-      const selected = getSelectedBooksData();
-      const total = selected.reduce((sum, book) => sum + book.price, 0);
-
+      var selected = getSelectedBooksData();
+      var total = selected.reduce(function (sum, book) { return sum + (book.price * (bookQuantities[book.id] || 1)); }, 0);
       booksCount.textContent = selected.length;
-      totalPrice.textContent = `${total} ج.م`;
+      totalPrice.textContent = total + " ج.م";
 
-      selectedList.innerHTML = selected.length
-        ? selected.map(book => `<li>${book.title} - ${book.price} ج.م</li>`).join("")
-        : `<li>لم يتم اختيار كتب بعد</li>`;
+      if (selected.length === 0) {
+        selectedList.innerHTML = "<li><span>لم يتم اختيار كتب بعد</span></li>";
+        return;
+      }
+
+      var html = "";
+      for (var i = 0; i < selected.length; i++) {
+        var qty = bookQuantities[selected[i].id] || 1;
+        html += "<li><span>" + escapeHtml(selected[i].title) + " × " + qty + " - " + (selected[i].price * qty) + " ج.م</span><button type=\"button\" class=\"remove-item\" data-id=\"" + selected[i].id + "\">حذف</button></li>";
+      }
+      selectedList.innerHTML = html;
+
+      var removeButtons = selectedList.querySelectorAll(".remove-item");
+      for (var r = 0; r < removeButtons.length; r++) {
+        removeButtons[r].addEventListener("click", function () {
+          var id = Number(this.getAttribute("data-id"));
+          selectedBooks = selectedBooks.filter(function (bookId) { return bookId !== id; });
+          delete bookQuantities[id];
+          renderBooks();
+          updateSummary();
+        });
+      }
     }
 
     function showMessage(type, text) {
-      messageBox.className = `message ${type}`;
+      messageBox.className = "message " + type;
       messageBox.textContent = text;
     }
 
-    function buildWhatsAppLink(orderData) {
-      const text = `أهلاً، تم إرسال طلب جديد:%0A%0A` +
-        `الاسم: ${orderData.customerName}%0A` +
-        `رقم الواتساب: ${orderData.phone}%0A` +
-        `الكتب: ${orderData.booksText}%0A` +
-        `طريقة الاستلام: ${orderData.deliveryMethod}%0A` +
-        `الإجمالي: ${orderData.total} ج.م%0A` +
-        `ملاحظات: ${orderData.notes || "لا يوجد"}`;
-
-      return `https://wa.me/${STORE_WHATSAPP_NUMBER}?text=${text}`;
+    function normalizePhone(phone) {
+      return phone.replace(/[^0-9]/g, "");
     }
 
-    searchInput.addEventListener("input", () => renderBooks(searchInput.value));
+    function runTests() {
+      console.assert(getCategories().indexOf("الكل") !== -1, "Test failed: categories should include الكل");
+      console.assert(getCategories().indexOf("الصف الاول الابتدائي") !== -1, "Test failed: categories should include الصف الاول الابتدائي");
+      console.assert(normalizePhone("015-545 96691") === "01554596691", "Test failed: phone normalization");
+      console.assert(escapeHtml("<test>") === "&lt;test&gt;", "Test failed: escapeHtml should escape tags");
+      console.assert(typeof renderBooks === "function", "Test failed: renderBooks should exist");
+      console.assert(typeof updateSummary === "function", "Test failed: updateSummary should exist");
+    }
 
-    orderForm.addEventListener("submit", async (event) => {
+    searchInput.addEventListener("input", renderBooks);
+    sortSelect.addEventListener("change", renderBooks);
+    closeModalBtn.addEventListener("click", function () { successModal.classList.remove("show"); });
+    successModal.addEventListener("click", function (event) {
+      if (event.target === successModal) successModal.classList.remove("show");
+    });
+
+    orderForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      const selected = getSelectedBooksData();
+      var selected = getSelectedBooksData();
       if (selected.length === 0) {
         showMessage("error", "اختار كتاب واحد على الأقل قبل إرسال الطلب.");
         return;
       }
-      const total = selected.reduce((sum, book) => sum + book.price, 0);
 
-      const orderData = {
-        customerName: document.getElementById("customerName").value.trim(),
-        phone: document.getElementById("phone").value.trim(),
+      var customerName = document.getElementById("customerName").value.trim();
+      var phone = normalizePhone(document.getElementById("phone").value.trim());
+
+      if (phone.length < 10) {
+        showMessage("error", "اكتب رقم تواصل صحيح عشان نقدر نتابع الطلب.");
+        return;
+      }
+
+      var total = selected.reduce(function (sum, book) { return sum + (book.price * (bookQuantities[book.id] || 1)); }, 0);
+      var booksText = selected.map(function (book) {
+        var qty = bookQuantities[book.id] || 1;
+        return book.title + " × " + qty + " (" + (book.price * qty) + " ج.م)";
+      }).join(" | ");
+
+      var orderData = {
+        customerName: customerName,
+        phone: phone,
         deliveryMethod: document.getElementById("deliveryMethod").value,
         notes: document.getElementById("notes").value.trim(),
-        booksText: selected.map(book => `${book.title} (${book.price} ج.م)`).join(" | "),
-        total,
+        booksText: booksText,
+        total: total,
         status: "Pending",
         createdAt: new Date().toLocaleString("ar-EG")
       };
 
-      if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("PUT_YOUR")) {
-        showMessage("error", "الموقع جاهز، لكن لازم تحط رابط Google Apps Script في الكود الأول عشان الطلبات تتسجل في الشيت.");
-        return;
-      }
-
       submitBtn.disabled = true;
       submitBtn.textContent = "جاري إرسال الطلب...";
-      whatsappBtn.style.display = "none";
 
-      try {
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(orderData)
-        });
-
-        showMessage("success", "تم تسجيل طلبك بنجاح ✅ هنتواصل معاك على واتساب لتأكيد الأوردر.");
-        whatsappBtn.href = buildWhatsAppLink(orderData);
-        whatsappBtn.style.display = "block";
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+      }).then(function () {
+        showMessage("success", "تم تسجيل طلبك بنجاح ✅ سيتم التواصل مع حضرتك خلال 10 - 15 يوم لمتابعة الطلب.");
+        successModal.classList.add("show");
         orderForm.reset();
         selectedBooks = [];
+        bookQuantities = {};
+        activeCategory = "الكل";
+        renderCategories();
         renderBooks();
         updateSummary();
-      } catch (error) {
-        showMessage("error", "حصلت مشكلة أثناء إرسال الطلب. جرّب تاني أو تواصل معانا واتساب.");
-      } finally {
+      }).catch(function () {
+        showMessage("error", "حصلت مشكلة أثناء إرسال الطلب. جرّب تاني أو ابعت استفسار سريع.");
+      }).finally(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = "إرسال الطلب";
-      }
+      });
     });
 
+    setupWhatsAppLink();
+    renderCategories();
     renderBooks();
     updateSummary();
+    runTests();
   </script>
 </body>
 </html>
